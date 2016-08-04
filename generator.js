@@ -65,50 +65,55 @@ var server = "var express = require('express');" + '\n' +
 "});";
 
 function generateMBP(){
-	fs.mkdirSync('~/desktop/newWebpageByMBP', function(err){
+	shell.exec("cd ~/desktop");
+	fs.mkdirSync('newWebpageByMBP', function(err){
 		if(err){
 			console.log("error");
 			return;
 		} 
 		console.log("directory newWebpageByMBP created");
 	});
-	fs.mkdirSync('~/desktop/newWebpageByMBP/public', function(err){
+	shell.exec("cd newWebpageByMBP/");
+	fs.mkdirSync('public', function(err){
 		if(err){
 			console.log("error");
 			return;
 		}
 		console.log("public folder created");
 	});
-	fs.writeFile("~/desktop/newWebpageByMBP/public/index.html", clientHTML, function(err){
+	shell.exec("cd public/");
+	fs.writeFile("index.html", clientHTML, function(err){
 		if(err){
 			console.log("error");
 			return;
 		}
 		console.log("index.html created");
 	});
-	fs.writeFile("~/desktop/newWebpageByMBP/public/style.css", "", function(err){
+	fs.writeFile("style.css", "", function(err){
 		if(err){
 			console.log("error");
 			return;
 		}
 		console.log("style.css created");
 	});
-	fs.writeFile("~/desktop/newWebpageByMBP/public/javascript.js", "", function(err){
+	fs.writeFile("javascript.js", "", function(err){
 		if(err){
 			console.log("error");
 			return;
 		}
 		console.log("javascript.js created");
 	});
-	fs.writeFile("~/desktop/newWebpageByMBP/server.js", server, function(err){
+	shell.exec("cd ..")
+	fs.writeFile("server.js", server, function(err){
 		if(err){
 			console.log("error");
 			return;
 		}
 		console.log("server.js created");
 	});
-	shell.exec("cd ~/desktop/newWebpageByMBP");
 	shell.exec("npm i");
+	shell.exec("npm install --save express");
+	shell.exec("npm install")
 	shell.exec("^c");
 }
 
