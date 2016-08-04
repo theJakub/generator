@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HACKATHON SOURCES</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+		<script
+		src="https://code.jquery.com/jquery-3.1.0.min.js"
+		integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+		crossorigin="anonymous"
+	></script>
+	<script src="javascript.js"></script>
+</head>
+<body>
+	<h4> 1. var express = require("express"); </h4>
+		<p> Express is a library that we installed by running npm install express --save in the terminal. It is located in the node_modules folder. Express makes our job of writing a node server much easier by providing shortcuts for many of the tasks that would otherwise take a lot of code to complete. typeof(express) == "function". </p>
+
+	<h4> 2. var app = express(); </h4>
+		<p> We call the express function to create a new "Express App" This "app" will handle every request that comes in to our server We're going to configure this app to handle the requests the way that we want. </p>
+
+	<h4> 3 . var PORT = process.env.PORT || 8000; </h4>
+		<p> process.env.PORT is an environment (system) variable which allows an external application like Heroku to set the port for our server. Or, we use the default port of 8000. Remember! Ports below 1024 are reserved for administrator use only. </p>
+
+	<h4> 4. var bodyParser = require('body-parser'); </h4>
+		<p> Require (but don't yet use) the body-parser middleware (installed using "npm install --save body-parser"). This will take any POST request body, parse it, and give it to us as an object called req.body, after the request has passed through that middleware. </p>
+
+	<h4> 5. var session = require('express-session'); </h4>
+		<p> This does the same thing as above except that it handles our session data - it adds an object called req.session, which is unique to each user and persists for that user across requests. </p>
+
+	<h4> 6. app.use(bodyParser.urlencoded({ extended : false})); </h4>
+		<p> bodyParser.urlencoded() returns a function(req, res, next) which is used as this layer of middleware. We pass an options object in as the first parameter to configure the way that the bodyparser middleware function works. This handles form submit data. </p>
+
+	<h4> 7. app.use(bodyParser.json()); </h4>
+		<p> Same, parse application/json (json AJAX requests). </p>
+
+	<h4> 8. app.use(express.static("public")); </h4>
+		<p> Serve all files and folders in "public" as-is. </p>
+
+	<h4> 9. app.use(function(req, res, next) {
+				res.status(404);
+				res.send("It's not very effective");
+	}); </h4>
+		<p> If no other route matches, send a 404 error (file not found). </p>
+
+	<h4> 10. app.listen(PORT, function() {
+				console.log(" ????? " + PORT);
+	}); </h4>
+		<p> Start the server! </p>
+</body>
+</html>
