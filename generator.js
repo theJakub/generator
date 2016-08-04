@@ -25,7 +25,7 @@ var html = "<!DOCTYPE html>" + '\n' +
 '<script src="javascript.js"></script>' + '\n' +
 '<!-- the above <script> tags are accessing your local javascript file. -->' + '\n' +
 '</body>' + '\n' +
-'</html>"';
+'</html>';
 
 //js for the server.js
 var server = "var express = require('express');" + '\n' +
@@ -86,10 +86,11 @@ var cssTxt = "/* In this file you will create all of your custom styling.*/";
 
 function generateMBP(){
 	shell.exec("cd ~/Desktop; mkdir newWebpageByMBP; cd newWebpageByMBP/; touch server.js; echo " + '"' + server + '"' + " >> server.js");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; mkdir public/; cd public/; touch index.html; touch style.css; touch javascript.js; echo " + '"' + html + '"' + " >> index.html; echo " + '"' + cssTxt + '"' + " >> style.css; echo " + '"' + jsTxt + '"' + " >> javascript.js");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; touch .gitignore; echo node_modules >> .gitignore");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; mkdir public/; cd public/; touch index.html; echo " + '"' + html + '"' + " >> index.html");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/public/; touch style.css; touch javascript.js; echo " + '"' + cssTxt + '"' + " >> style.css; echo " + '"' + jsTxt + '"' + " >> javascript.js");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; touch .gitignore; echo " + '"node_modules"' + " >> .gitignore; mkdir data");
 	shell.exec("cd ~/Desktop/newWebpageByMBP/; npm init; npm install express --save; npm install --save express-session; npm install --save body-parser");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; touch data; npm install --save mongoose; mongod --dbpath ./data");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; npm install --save mongoose; mongod --dbpath ./data");
 }
 
 generateMBP();
