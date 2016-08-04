@@ -82,7 +82,7 @@ var server = "var express = require('express');" + '\n' +
 '//Start the server!';
 
 var jsTxt = "//In this file, you will create your javascript code.";
-var cssTxt = "/* In this file you will create all of your custom styling.";
+var cssTxt = "/* In this file you will create all of your custom styling.*/";
 
 function generateMBP(){
 	shell.exec("cd ~/Desktop; mkdir newWebpageByMBP; cd newWebpageByMBP/; touch server.js; echo " + '"' + server + '"' + " >> server.js");
