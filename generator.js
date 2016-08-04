@@ -1,20 +1,7 @@
-var express = require("express");
-
-var app = express();
-
-var bodyParser = require("body-parser");
-
-var open = require("open");
-
-var fs = require("fs");
-
 var shell = require("shelljs");
 
-app.use(bodyParser.urlencoded({extended: false }));
-app.use(bodyParser.json());
-
 //html to be written into the client file
-var clientHTML = "<!DOCTYPE html>" + '\n' +
+var html = "<!DOCTYPE html>" + '\n' +
 "<html>" + '\n' +
 "<head>" + '\n' +
 "	<title></title>" + '\n' +
@@ -29,10 +16,6 @@ var clientHTML = "<!DOCTYPE html>" + '\n' +
 '</head>' + '\n' +
 '<body>' + '\n' +
 
-
-
-
-
 '<script src="javascript.js"></script>' + '\n' +
 
 '</body>' + '\n' +
@@ -40,6 +23,8 @@ var clientHTML = "<!DOCTYPE html>" + '\n' +
 
 //js for the server.js
 var server = "var express = require('express');" + '\n' +
+
+'Express is a library that we installed by running npm install express --save in the terminal. It is located in the node_modules folder. Express makes our job of writing a node server much easier by providing shortcuts for many of the tasks that would otherwise take a lot of code to complete. typeof(express) == "function".' + '\n' +
 
 "var app = express();" + '\n' +
 
@@ -65,65 +50,10 @@ var server = "var express = require('express');" + '\n' +
 "});";
 
 function generateMBP(){
-	shell.exec("cd ~/desktop");
-	fs.mkdirSync('newWebpageByMBP', function(err){
-		if(err){
-			console.log("error");
-			return;
-		} 
-		console.log("directory newWebpageByMBP created");
-	});
-	shell.exec("cd newWebpageByMBP/");
-	fs.mkdirSync('public', function(err){
-		if(err){
-			console.log("error");
-			return;
-		}
-		console.log("public folder created");
-	});
-	shell.exec("cd public/");
-	fs.writeFile("index.html", clientHTML, function(err){
-		if(err){
-			console.log("error");
-			return;
-		}
-		console.log("index.html created");
-	});
-	fs.writeFile("style.css", "", function(err){
-		if(err){
-			console.log("error");
-			return;
-		}
-		console.log("style.css created");
-	});
-	fs.writeFile("javascript.js", "", function(err){
-		if(err){
-			console.log("error");
-			return;
-		}
-		console.log("javascript.js created");
-	});
-	shell.exec("cd ..")
-	fs.writeFile("server.js", server, function(err){
-		if(err){
-			console.log("error");
-			return;
-		}
-		console.log("server.js created");
-	});
-	shell.exec("npm i");
-	shell.exec("npm install --save express");
-	shell.exec("npm install")
-	shell.exec("^c");
+	shell.exec("cd ~/Desktop; mkdir newWebpageByMBP; cd newWebpageByMBP/; touch server.js; echo " + '"' + server + '"' + " >> server.js");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; mkdir public/; cd public/; touch index.html; touch style.css; touch javascript.js; echo " + '"' + html + '"' + " >> index.html");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; touch .gitignore; echo node_modules >> .gitignore");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; npm init; npm install express --save; npm install --save body-parser");
 }
 
 generateMBP();
-
-app.use(function(req, res, next){
-	res.status(404);
-	res.send("you messed up");
-});
-
-app.listen(8000, function(){
-	console.log("Listening on port 8000");
-});
