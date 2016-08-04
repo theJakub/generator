@@ -5,19 +5,25 @@ var html = "<!DOCTYPE html>" + '\n' +
 "<html>" + '\n' +
 "<head>" + '\n' +
 "	<title></title>" + '\n' +
+'	<!-- Put the name of your website inbetween the <title> tags. This will display on the tab of the browser when your page is visited -->' + '\n' +
 '	<meta charset="utf-8">' + '\n' +
+'	<!-- the meta charset indicates the characters used in the text of our page -->' + '\n' +
 '	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">' + '\n' +
+'	<!-- the above <link> tag brings in bootstrap to make styling your page easier -->' + '\n' +
 '	<link rel="stylesheet" type="text/css" href="style.css">' + '\n' +
+'	<!-- this link will bring in your custom styling from your stylesheet -->' + '\n' +
 '		<script' + '\n' +
 '		src="https://code.jquery.com/jquery-3.1.0.min.js"' + '\n' +
 '		integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="' + '\n' +
 '		crossorigin="anonymous"' + '\n' +
 '	></script>' + '\n' +
+'	<!-- the <script> tag above will load jQuery which will allow your data reqests to be handled with less code -->' + '\n' +
 '</head>' + '\n' +
+'<!-- the <body> tags below encase everything shown on the webpage. All of your <div>, paragraphs, images and really anything your user will see will go inbetween the <body> tags -->' + '\n' +
 '<body>' + '\n' +
 
 '<script src="javascript.js"></script>' + '\n' +
-
+'<!-- the above <script> tags are accessing your local javascript file. -->' + '\n' +
 '</body>' + '\n' +
 '</html>"';
 
@@ -73,17 +79,17 @@ var server = "var express = require('express');" + '\n' +
 "	console.log('server started on ' + PORT);" + '\n' +
 "});" + '\n' +
 
-<<<<<<< HEAD
-'Start the server!';
-=======
 '//Start the server!';
->>>>>>> origin/master
+
+var jsTxt = "//In this file, you will create your javascript code.";
+var cssTxt = "/* In this file you will create all of your custom styling.";
 
 function generateMBP(){
 	shell.exec("cd ~/Desktop; mkdir newWebpageByMBP; cd newWebpageByMBP/; touch server.js; echo " + '"' + server + '"' + " >> server.js");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; mkdir public/; cd public/; touch index.html; touch style.css; touch javascript.js; echo " + '"' + html + '"' + " >> index.html");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; mkdir public/; cd public/; touch index.html; touch style.css; touch javascript.js; echo " + '"' + html + '"' + " >> index.html; echo " + '"' + cssTxt + '"' + " >> style.css; echo " + '"' + jsTxt + '"' + " >> javascript.js");
 	shell.exec("cd ~/Desktop/newWebpageByMBP/; touch .gitignore; echo node_modules >> .gitignore");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; npm init; npm install express --save; npm install --save body-parser");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; npm init; npm install express --save; npm install --save express-session; npm install --save body-parser");
+	shell.exec("cd ~/Desktop/newWebpageByMBP/; touch data; npm install --save mongoose; mongod --dbpath ./data");
 }
 
 generateMBP();
