@@ -63,9 +63,9 @@ var server = "var express = require('express');" + '\n' +
 
 "app.listen(PORT, function() {" + '\n' +
 "	console.log('server started on ' + PORT);" + '\n' +
-"});";
+"});" + '\n' +
 
-'Start the server!'
+'Start the server!';
 
 function generateMBP(){
 	shell.exec("cd ~/Desktop; mkdir newWebpageByMBP; cd newWebpageByMBP/; touch server.js; echo " + '"' + server + '"' + " >> server.js");
