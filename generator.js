@@ -1,4 +1,5 @@
 var shell = require("shelljs");
+var path = require('path');
 
 //html to be written into the client file
 var html = "<!DOCTYPE html>" + '\n' +
@@ -84,13 +85,35 @@ var server = "var express = require('express');" + '\n' +
 var jsTxt = "//In this file, you will create your javascript code.";
 var cssTxt = "/* In this file you will create all of your custom styling.*/";
 
+// package.json cannot be annotated.
+var jsonTxt = '{' + '\n' +
+'  "name": "newwebpage",' + '\n' +
+'  "version": "1.0.0",' + '\n' +
+'  "description": "",' + '\n' +
+'  "main": "server.js",' + '\n' +
+'  "scripts": {' + '\n' +
+'    "test": "echo \\\"Error: no test specified\\\" && exit 1",' + '\n' +
+'    "start": "node server.js"' + '\n' +
+'  },' + '\n' +
+'  "author": "",' + '\n' +
+'  "license": "ISC"' + '\n' +
+'}';
+
 function generateMBP(){
-	shell.exec("cd ~/Desktop; mkdir newWebpageByMBP; cd newWebpageByMBP/; touch server.js; echo " + '"' + server + '"' + " >> server.js");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; mkdir public/; cd public/; touch index.html; echo " + '"' + html + '"' + " >> index.html");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/public/; touch style.css; touch javascript.js; echo " + '"' + cssTxt + '"' + " >> style.css; echo " + '"' + jsTxt + '"' + " >> javascript.js");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; touch .gitignore; echo " + '"node_modules"' + " >> .gitignore; mkdir data");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; npm init; npm install express --save; npm install --save express-session; npm install --save body-parser");
-	shell.exec("cd ~/Desktop/newWebpageByMBP/; npm install --save mongoose; mongod --dbpath ./data");
+	process.chdir(path.join(process.env.HOME, "Desktop"));
+	shell.exec("mkdir newwebpage; cd newwebpage/; touch server.js; echo " + '"' + server + '"' + " >> server.js");
+	process.chdir("newwebpage");
+	shell.exec("mkdir public/; cd public/; touch index.html; echo " + '"' + html + '"' + " >> index.html; touch style.css; touch javascript.js; echo " + '"' + cssTxt + '"' + " >> style.css; echo " + '"' + jsTxt + '"' + " >> javascript.js");
+	shell.exec("touch .gitignore; echo " + '"node_modules"' + " >> .gitignore; echo " + '"data"' + " >> .gitignore; mkdir data; touch package.json"); 
+	shell.exec("echo " + "'" + jsonTxt + "'" + " >> package.json");
+	shell.exec("npm install express --save >& /dev/null; npm install --save express-session >& /dev/null; npm install --save body-parser >& /dev/null; npm install --save mongoose >& /dev/null");
+	console.log('!@$#%^*&*');
+	console.log("All of your files are created and ready.");
+	console.log("Once you have written the rest of your server and website, run 'mongod --dbpath ./data' to start your Mongo database");
+	console.log("In a seperate terminal window run 'node server.js' to start the server.");
+	console.log("You will then be able to visit your website in a browser with the web address 'http//localhost:8000'.");
+	console.log("Thank You and enjoy :) -MBP");
+	console.log('!@#$%^&*');
 }
 
 generateMBP();
